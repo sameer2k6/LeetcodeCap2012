@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int left = 0, right = nums.size() - 1;
+        int ans = nums.size(); // default insert at end
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] >= target) {
+                ans = mid;        // possible answer
+                right = mid - 1;  // try to find earlier position
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+};

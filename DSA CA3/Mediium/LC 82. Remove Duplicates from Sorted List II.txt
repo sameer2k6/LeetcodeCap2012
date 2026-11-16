@@ -1,0 +1,32 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode dummy(0);
+        dummy.next = head;
+
+        ListNode* prev = &dummy;
+        ListNode* cur = head;
+
+        while (cur) {
+            bool duplicate = false;
+
+            // move cur while duplicates exist
+            while (cur->next && cur->val == cur->next->val) {
+                duplicate = true;
+                cur = cur->next;
+            }
+
+            if (duplicate) {
+                // skip entire duplicate block
+                prev->next = cur->next;
+            } else {
+                // no duplicates, move prev
+                prev = prev->next;
+            }
+
+            cur = cur->next;
+        }
+
+        return dummy.next;
+    }
+};
